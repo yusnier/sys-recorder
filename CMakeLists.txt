@@ -12,12 +12,20 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Multimedia)
+find_package(Qt6 REQUIRED COMPONENTS MultimediaWidgets)
 
 set(PROJECT_SOURCES
         src/main.cpp
         src/mainwindow.cpp
         src/mainwindow.h
         src/mainwindow.ui
+
+        src/inputhandler.cpp
+        src/inputhandler.h
+        src/screenlivecapture.cpp
+        src/screenlivecapture.h
+        src/screenlivecapture2.cpp
+        src/screenlivecapture2.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -46,6 +54,7 @@ endif()
 target_link_libraries(sys-recorder
     PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
     PRIVATE Qt${QT_VERSION_MAJOR}::Multimedia
+    PRIVATE Qt${QT_VERSION_MAJOR}::MultimediaWidgets
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

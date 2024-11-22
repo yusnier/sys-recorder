@@ -4,6 +4,11 @@
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
+
+class InputHandler;
+class ScreenLiveCapture;
+class ScreenLiveCapture2;
+
 namespace Ui {
 class MainWindow;
 }
@@ -19,5 +24,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    ScreenLiveCapture *screenLiveCapture;
+    ScreenLiveCapture2 *screenLiveCapture2;
+    InputHandler *inputHandler;
 };
 #endif // MAINWINDOW_H
