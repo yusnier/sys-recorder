@@ -13,6 +13,7 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Multimedia)
 find_package(Qt6 REQUIRED COMPONENTS MultimediaWidgets)
+find_package(Qt6 REQUIRED COMPONENTS OpenGLWidgets)
 
 set(PROJECT_SOURCES
         src/main.cpp
@@ -26,6 +27,14 @@ set(PROJECT_SOURCES
         src/screenlivecapture.h
         src/screenlivecapture2.cpp
         src/screenlivecapture2.h
+        src/screenlivecaptureworker.h
+        src/screenlivecaptureworker.cpp
+        src/screenlivecapture3.h
+        src/screenlivecapture3.cpp
+        src/glwidget.h
+        src/glwidget.cpp
+        src/sysrecorder.h
+        src/sysrecorder.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -55,7 +64,14 @@ target_link_libraries(sys-recorder
     PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
     PRIVATE Qt${QT_VERSION_MAJOR}::Multimedia
     PRIVATE Qt${QT_VERSION_MAJOR}::MultimediaWidgets
+    PRIVATE Qt${QT_VERSION_MAJOR}::OpenGLWidgets
 )
+if (WIN32)
+    target_link_libraries(sys-recorder PRIVATE opengl32)
+else()
+    find_package(OpenGL REQUIRED)
+    target_link_libraries(sys-recorder PRIVATE OpenGL::GL)
+endif()
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
